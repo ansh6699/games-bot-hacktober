@@ -583,4 +583,57 @@ if(message.content === prefix + "translate" || message.content === prefix + "ت�
   "Ear"
   ]
 
+const tr = [
+   "جراح", 
+  "والد", 
+  "مضحك", 
+  "عالم", 
+  "مبرمج", 
+  "اهلا بك", 
+  "بيض", 
+  "نار", 
+  "جليد", 
+  "سترة", 
+  "مسرور", 
+  "ممل", 
+  "محاسب", 
+  "نجار", 
+  "عين", 
+  "أنتظر", 
+  "أذن"
+  
+  ]
+  
+  let tra = Math.floor(Math.random() * t.length)
+  const embed = new Discord.MessageEmbed()
+ .setAuthor(client.user.username, client.user.avatarURL())
+ .setColor("BLUE")
+.setDescription(`\`\`\`${t[tra]}\`\`\``)
+.setFooter("You Have 15 Seconds")
+.setTimestamp()
+  message.channel.send(embed)
+ const filter = m => m.content.includes(tr[tra]);
+ message.channel.awaitMessages(filter, {
+          max: 1,
+          time: 15000,
+          errors: ['time'],
+        }) 
+
+.then((collected) => {
+const embed = new Discord.MessageEmbed()
+.setColor("GREEN")
+.setDescription(`✅ | <@${collected.first().author.id}> The answer is correct`)
+message.channel.send(embed)
+})
+.catch(() => {
+const embed = new Discord.MessageEmbed()
+.setColor("RED")
+.setDescription(`🕘 | The time is Over`)
+message.channel.send(embed)
+})
+}
+})
+
+client.login(process.env.token).catch(() =>{
+    console.log("Invalid Token")
 })
